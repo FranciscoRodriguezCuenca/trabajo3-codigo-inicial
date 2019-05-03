@@ -81,21 +81,9 @@ return credito;}
 		double comision = (x * comisiontarifa < 3.0 ? 3 : x * comisiontarifa); 		
 		if (x > getCreditoDisponible())
 			throw new Exception("Crédito insuficiente");
-		nuevoMovimiento(x + comision, "Retirada en cuenta asociada (cajero automático)");
+		//nuevoMovimiento(x + comision, "Retirada en cuenta asociada (cajero automático)");
+		utilidades.nuevoMovimiento(x + comision, "Retirada en cuenta asociada (cajero automático)",this.mMovimientos);
 	}
-	//nuevo movimiento
-	
-	public void nuevoMovimiento(double importe, String mensaje) {
-		
-		Movimiento m = new Movimiento();
-		m.setConcepto(mensaje);
-		m.setImporte(importe);
-		Date date = new Date();
-		LocalDate fecha = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-		m.setFecha(fecha);
-		mMovimientos.addElement(m);
-	}
-	
 	//traspaso tarjeta a cuenta
 		public void ingresar(double x) throws Exception {
 			// Movimiento m=new Movimiento();
@@ -106,7 +94,7 @@ return credito;}
 			double comision = (x * 0.05 < 3.0 ? 3 : x * 0.05); // Añadimos una comisión de un 5%, mínimo de 3 euros.		
 			if (x > getCreditoDisponible())
 				throw new Exception("Crédito insuficiente");
-			nuevoMovimiento(x, "Traspaso desde tarjeta a cuenta");
+			utilidades.nuevoMovimiento(x, "Traspaso desde tarjeta a cuenta",this.mMovimientos);
 			
 			mCuentaAsociada.ingresar("Traspaso desde tarjeta a cuenta", x);
 			mCuentaAsociada.retirar("Comision Traspaso desde tarjeta a cuenta", comision);
