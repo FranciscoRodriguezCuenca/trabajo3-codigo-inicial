@@ -14,7 +14,6 @@ public class Utilidades {
 		Date date = new Date();
 		LocalDate fecha = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 		m.setFecha(fecha);
-		//mMovimientos.addElement(m);
 		return m;
 	}
 	
