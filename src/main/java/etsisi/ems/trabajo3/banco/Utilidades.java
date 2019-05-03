@@ -5,7 +5,7 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.Vector;
 
-public class utilidades {
+public class Utilidades {
 	
 	public static void nuevoMovimiento(double importe, String mensaje, Vector<Movimiento> mMovimientos) {
 		

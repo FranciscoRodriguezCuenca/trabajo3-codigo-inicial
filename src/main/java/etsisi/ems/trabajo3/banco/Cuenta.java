@@ -19,7 +19,7 @@ public class Cuenta {
 	public void ingresar(double x) throws Exception {
 		if (x <= 0)
 			throw new Exception("No se puede ingresar una cantidad negativa");
-		utilidades.nuevoMovimiento(x, "Ingreso en efectivo",this.mMovimientos);
+		Utilidades.nuevoMovimiento(x, "Ingreso en efectivo",this.mMovimientos);
 	}
 
 	public void retirar(double x) throws Exception {
@@ -27,7 +27,7 @@ public class Cuenta {
 			throw new Exception("No se puede retirar una cantidad negativa");
 		if (getSaldo() < x)
 			throw new Exception("Saldo insuficiente");
-		utilidades.nuevoMovimiento(-x, "Retirada de efectivo",this.mMovimientos);
+		Utilidades.nuevoMovimiento(-x, "Retirada de efectivo",this.mMovimientos);
 
 	}
 

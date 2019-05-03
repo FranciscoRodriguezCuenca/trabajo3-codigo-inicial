@@ -82,7 +82,7 @@ return credito;}
 		if (x > getCreditoDisponible())
 			throw new Exception("Crédito insuficiente");
 		//nuevoMovimiento(x + comision, "Retirada en cuenta asociada (cajero automático)");
-		utilidades.nuevoMovimiento(x + comision, "Retirada en cuenta asociada (cajero automático)",this.mMovimientos);
+		Utilidades.nuevoMovimiento(x + comision, "Retirada en cuenta asociada (cajero automático)",this.mMovimientos);
 	}
 	//traspaso tarjeta a cuenta
 		public void ingresar(double x) throws Exception {
@@ -94,7 +94,7 @@ return credito;}
 			double comision = (x * 0.05 < 3.0 ? 3 : x * 0.05); // Añadimos una comisión de un 5%, mínimo de 3 euros.		
 			if (x > getCreditoDisponible())
 				throw new Exception("Crédito insuficiente");
-			utilidades.nuevoMovimiento(x, "Traspaso desde tarjeta a cuenta",this.mMovimientos);
+			Utilidades.nuevoMovimiento(x, "Traspaso desde tarjeta a cuenta",this.mMovimientos);
 			
 			mCuentaAsociada.ingresar("Traspaso desde tarjeta a cuenta", x);
 			mCuentaAsociada.retirar("Comision Traspaso desde tarjeta a cuenta", comision);
