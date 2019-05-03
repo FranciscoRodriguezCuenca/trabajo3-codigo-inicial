@@ -6,8 +6,7 @@ import java.util.Date;
 import java.util.Vector;
 
 public class Utilidades {
-	
-	public static void nuevoMovimiento(double importe, String mensaje, Vector<Movimiento> mMovimientos) {
+	public static Movimiento nuevoMovimiento(double importe, String mensaje) {
 		
 		Movimiento m = new Movimiento();
 		m.setConcepto(mensaje);
@@ -15,6 +14,7 @@ public class Utilidades {
 		Date date = new Date();
 		LocalDate fecha = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 		m.setFecha(fecha);
-		mMovimientos.addElement(m);
+		//mMovimientos.addElement(m);
+		return m;
 	}
 }

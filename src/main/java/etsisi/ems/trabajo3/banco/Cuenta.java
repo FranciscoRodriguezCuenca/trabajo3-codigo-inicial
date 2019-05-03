@@ -19,7 +19,7 @@ public class Cuenta {
 	public void ingresar(double x) throws Exception {
 		if (x <= 0)
 			throw new Exception("No se puede ingresar una cantidad negativa");
-		Utilidades.nuevoMovimiento(x, "Ingreso en efectivo",this.mMovimientos);
+		addMovimiento(Utilidades.nuevoMovimiento(x, "Ingreso en efectivo"));
 	}
 
 	public void retirar(double x) throws Exception {
@@ -27,20 +27,14 @@ public class Cuenta {
 			throw new Exception("No se puede retirar una cantidad negativa");
 		if (getSaldo() < x)
 			throw new Exception("Saldo insuficiente");
-		Utilidades.nuevoMovimiento(-x, "Retirada de efectivo",this.mMovimientos);
+		addMovimiento(Utilidades.nuevoMovimiento(-x, "Retirada de efectivo"));
 
 	}
 
 	public void ingresar(String concepto, double x) throws Exception {
 		if (x <= 0)
 			throw new Exception("No se puede ingresar una cantidad negativa");
-		Movimiento m = new Movimiento();
-		m.setConcepto(concepto);
-		m.setImporte(x);
-		Date date = new Date();
-		LocalDate fecha = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-		m.setFecha(fecha);
-		this.mMovimientos.addElement(m);
+		addMovimiento(Utilidades.nuevoMovimiento(x, concepto));
 	}
 
 	public void retirar(String concepto, double x) throws Exception {
@@ -48,13 +42,7 @@ public class Cuenta {
 			throw new Exception("No se puede retirar una cantidad negativa");
 		if (getSaldo() < x)
 			throw new Exception("Saldo insuficiente");
-		Movimiento m = new Movimiento();
-		m.setConcepto(concepto);
-		m.setImporte(-x);
-		Date date = new Date();
-		LocalDate fecha = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-		m.setFecha(fecha);
-		this.mMovimientos.addElement(m);
+		addMovimiento(Utilidades.nuevoMovimiento(-x, concepto));
 	}
 
 	public double getSaldo() {

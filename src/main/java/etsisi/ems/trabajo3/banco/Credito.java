@@ -81,8 +81,7 @@ return credito;}
 		double comision = (x * comisiontarifa < 3.0 ? 3 : x * comisiontarifa); 		
 		if (x > getCreditoDisponible())
 			throw new Exception("Crédito insuficiente");
-		//nuevoMovimiento(x + comision, "Retirada en cuenta asociada (cajero automático)");
-		Utilidades.nuevoMovimiento(x + comision, "Retirada en cuenta asociada (cajero automático)",this.mMovimientos);
+		this.mMovimientos.addElement(Utilidades.nuevoMovimiento(x + comision, "Retirada en cuenta asociada (cajero automático)"));
 	}
 	//traspaso tarjeta a cuenta
 		public void ingresar(double x) throws Exception {
@@ -94,20 +93,15 @@ return credito;}
 			double comision = (x * 0.05 < 3.0 ? 3 : x * 0.05); // Añadimos una comisión de un 5%, mínimo de 3 euros.		
 			if (x > getCreditoDisponible())
 				throw new Exception("Crédito insuficiente");
-			Utilidades.nuevoMovimiento(x, "Traspaso desde tarjeta a cuenta",this.mMovimientos);
+			this.mMovimientos.addElement(Utilidades.nuevoMovimiento(x, "Traspaso desde tarjeta a cuenta"));
 			
 			mCuentaAsociada.ingresar("Traspaso desde tarjeta a cuenta", x);
 			mCuentaAsociada.retirar("Comision Traspaso desde tarjeta a cuenta", comision);
 		}
 
 	public void pagoEnEstablecimiento(String datos, double x) throws Exception {
-		Movimiento m = new Movimiento();
-		m.setConcepto("Compra a crédito en: " + datos);
-		m.setImporte(x);
-		Date date = new Date();
-		LocalDate fecha = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-		m.setFecha(fecha);
-		mMovimientos.addElement(m);
+		
+		this.mMovimientos.addElement(Utilidades.nuevoMovimiento(x, "Compra a crédito en: " + datos));
 	}
 
 	public double getSaldo() {
